@@ -1,189 +1,371 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>渐进负荷 隐私政策 · Progressive Load Privacy Policy</title>
-  <meta name="description" content="渐进负荷 App 隐私政策：数据默认仅存本机，健康数据不上传 iCloud，无第三方分析、广告或追踪。">
-  <style>
-    :root { color-scheme: light dark; }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
-                   "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      line-height: 1.75;
-      color: #1d1d1f;
-      background: #f5f5f7;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>渐进负荷 · 隐私政策</title>
+<meta name="description" content="渐进负荷（ProgressiveLoad）隐私政策：我们处理哪些信息、为何处理、以及你可以如何管理这些信息。">
+<style>
+  :root {
+    --bg: #ffffff;
+    --card: #f2f2f7;
+    --text: #1c1c1e;
+    --text-secondary: #6c6c70;
+    --accent: #007aff;
+    --separator: rgba(60, 60, 67, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --card: #1c1c1e;
+      --text: #ffffff;
+      --text-secondary: #98989d;
+      --accent: #0a84ff;
+      --separator: rgba(84, 84, 88, 0.5);
     }
-    main {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-      background: #fff;
-    }
-    h1 { font-size: 2rem; line-height: 1.25; margin: 0 0 8px; }
-    .subtitle { color: #6e6e73; margin: 0 0 8px; }
-    .updated { color: #6e6e73; font-size: .9rem; margin: 0 0 40px; }
-    h2 { font-size: 1.15rem; margin: 36px 0 10px; }
-    p, li { font-size: 1rem; }
-    ul { padding-left: 1.35em; }
-    li + li { margin-top: 6px; }
-    .en { margin-top: 72px; padding-top: 32px; border-top: 1px solid #d2d2d7; }
-    .en h2 { font-size: 1.05rem; }
-    .notice {
-      border: 1px solid #d2d2d7;
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin: 24px 0;
-      background: #fafafa;
-    }
-    a { color: #0066cc; }
-    @media (prefers-color-scheme: dark) {
-      body { color: #f5f5f7; background: #000; }
-      main { background: #1c1c1e; }
-      .subtitle, .updated { color: #a1a1a6; }
-      .notice { background: #2c2c2e; border-color: #3a3a3c; }
-      .en { border-top-color: #3a3a3c; }
-      a { color: #2997ff; }
-    }
-    @media (max-width: 520px) {
-      main { padding: 32px 18px 64px; }
-      h1 { font-size: 1.65rem; }
-    }
-  </style>
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 24px 20px 64px; }
+  .lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    background: var(--card);
+    color: var(--accent);
+    border: none;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .lang-toggle:active { opacity: 0.6; }
+  header { text-align: center; padding: 32px 0 24px; }
+  header .app-icon {
+    width: 88px;
+    height: 88px;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto 16px;
+  }
+  header h1 { font-size: 28px; font-weight: 700; }
+  header p { color: var(--text-secondary); margin-top: 8px; font-size: 15px; }
+  section { margin-top: 24px; }
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .card h2 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .card p { font-size: 15px; margin-top: 8px; }
+  .card p:first-of-type { margin-top: 0; }
+  .card ul { margin: 8px 0 0 20px; font-size: 15px; }
+  .card li { margin-top: 4px; }
+  .summary {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  .summary strong { display: block; margin-bottom: 4px; }
+  .links a {
+    display: block;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .links a::after { content: " ›"; color: var(--text-secondary); }
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--separator);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+</style>
 </head>
 <body>
-<main>
-  <h1>渐进负荷 隐私政策</h1>
-  <p class="subtitle">本应用重视你的隐私。本政策说明我们处理哪些信息、为何处理、以及你可以如何管理这些信息。</p>
-  <p class="updated">最后更新：2026 年 10 月 18 日 · Last updated: October 18, 2026</p>
+<button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+<div class="container">
 
-  <div class="notice">
-    <strong>一句话总结：</strong>训练数据默认只存本机；iCloud 同步默认关闭且只同步训练数据；健康数据始终只存本机；无第三方分析、广告或追踪，我们没有任何服务器保存你的数据。
+  <!-- ========== 中文 ========== -->
+  <div id="page-zh">
+
+  <header>
+    <img class="app-icon" src="app-icon.png" alt="渐进负荷 App 图标">
+    <h1>渐进负荷</h1>
+    <p>隐私政策</p>
+  </header>
+
+  <div class="summary">
+    <strong>一句话总结</strong>
+    应用分「训练数据」与「健康数据」两个本地存储：训练数据默认只存本机、可经你主动开启的 iCloud 同步；健康数据（含性别、出生日期、身高）始终只存本机；无第三方分析、广告或追踪，我们没有任何服务器保存你的数据。
   </div>
+  <p style="color: var(--text-secondary); font-size: 13px; text-align: center; margin-bottom: 10px;">最后更新：2026 年 10 月 30 日</p>
 
-  <h2>1. 我们处理的信息</h2>
-  <ul>
-    <li><strong>训练档案：</strong>性别、出生日期、身高、训练经验、目标、每周训练天数。</li>
-    <li><strong>训练数据：</strong>训练日与动作安排、训练场次、每一组的重量、次数、RIR、备注与完成情况。</li>
-    <li><strong>自定义内容：</strong>自定义器械名称与照片、自定义动作。</li>
-    <li><strong>健康数据（只存本机）：</strong>伤病部位与状态、运动前筛查、疼痛与不适、疲劳/睡眠/酸痛/压力/情绪、体重、健康评测。</li>
-    <li><strong>偏好设置：</strong>显示语言、显示单位（kg / lb）、提醒与休息计时设置。</li>
-  </ul>
-  <p>以上信息默认保存在你的设备本地（应用沙盒内的数据库与文件）。</p>
-  <p>其中健康数据——伤病、运动前筛查、疼痛与不适、疲劳、体重、健康评测，以及由这些数据派生的健康设置——<strong>始终只存本机，不进入 iCloud</strong>。</p>
-  <p>「iCloud 数据同步」默认关闭，只用于训练数据（档案、训练日与动作安排、训练场次与组记录、自定义器械与动作、偏好设置）。只有你在首次完成一次训练后看到提示并选择开启（或自行在「我的 → 数据管理」中打开）之后，这些训练数据才会存入你自己的 iCloud 私有数据库（由 Apple 运营），以便在你的多台设备之间同步。</p>
-  <p>开启前我们会明确告知同步的数据范围与隐私注意事项；你也可以随时关闭（关闭后训练数据仅留本机）。无论是否开启，健康数据都不会离开本机，我们也不会收到、不会上传、也不会收集你的数据到我们自己的任何服务器。</p>
-
-  <h2>2. 设备权限与用途</h2>
-  <ul>
-    <li><strong>相机（可选）：</strong>仅当你为自定义器械拍照时使用，照片保存在应用本地。</li>
-    <li><strong>照片库（可选）：</strong>仅当你从相册选择器械图片时使用，所选图片复制到应用本地。</li>
-  </ul>
-  <p>两项权限都可以拒绝；拒绝后仅「自定义器械图片」不可用，其余功能不受影响。应用不会在后台访问相机或相册。</p>
-
-  <h2>3. 存储位置与保留期限</h2>
-  <p>训练数据默认保存在你的设备本地；若你开启 iCloud 同步，同一份训练数据也会保存在你的 iCloud 私有数据库，保留到你主动删除为止。健康数据始终只存本机，不进入 iCloud。</p>
-  <p>你可以在「我的 → 数据管理」中关闭 iCloud 数据同步（训练数据仅留本机），或使用「清空全部数据」（同时删除本机数据与 iCloud 中的训练数据，该操作不可撤销）。卸载应用会删除应用沙盒内的数据；如需一并清理 iCloud 中的副本，请在关闭同步后清空数据，或在 iOS「设置 → Apple 账户 → iCloud → 管理账户存储」中删除本应用的数据。</p>
-
-  <h2>4. 数据导出与导入</h2>
-  <p>导出与导入由你主动发起：导出时，应用把数据整理成 JSON 文件，交由「系统文件/分享面板」保存到你选择的位置；导入时，应用通过「系统文件选择器」读取你选择的文件。整个过程不经过我们的服务器，我们无法查看这些文件的内容。</p>
-  <p>请自行妥善保管导出的文件，其中包含你的训练与身体数据。</p>
-
-  <h2>5. 共享、广告与追踪</h2>
-  <p>我们不出售、不出租、不共享你的数据。应用不包含第三方分析、广告或社交 SDK，不进行跨应用追踪，不使用广告标识符（IDFA），也不会请求「允许 App 请求跟踪」授权。</p>
-  <p>唯一涉及第三方的环节是 iCloud 同步：训练数据由 Apple 的 iCloud 服务存储与传输（受 Apple 隐私政策与服务条款约束），我们无权访问其中的内容；健康数据不参与同步。</p>
-
-  <h2>6. 网络访问</h2>
-  <p>训练计划编排、记录、统计与导出/导入全部在本机完成，离线可用。以下情况会使用网络：</p>
-  <ul>
-    <li><strong>iCloud 数据同步（可选，默认关闭）：</strong>只有你主动开启后，才会把训练数据同步到你的 iCloud 私有数据库；健康数据始终不上传，可在「数据管理」中随时关闭。</li>
-    <li><strong>导出/导入：</strong>打开系统文件面板，由你选择位置（文件不经我们的服务器）。</li>
-    <li><strong>检查更新：</strong>点击「版本」时跳转 App Store。</li>
-  </ul>
-  <p>关闭 iCloud 同步后，日常使用完全不需要网络。</p>
-
-  <h2>7. 健康与医疗声明</h2>
-  <p>本应用提供一般训练信息与记录工具，不构成医疗建议，也不用于诊断或治疗。相关数据不代表临床结论。</p>
-  <p>如有孕期、心血管疾病、急性损伤、术后恢复期、关节置换或未控制的高血压等情况，请先咨询专业人士。</p>
-
-  <h2>8. 儿童隐私</h2>
-  <p>本应用不面向 13 岁以下儿童，也不会主动收集儿童的个人信息。我们不运营服务器，也不收集应用内的数据，因此无法访问任何用户的数据。</p>
-
-  <h2>9. 你的权利</h2>
-  <p>你可以随时查看、导出或删除全部数据（「我的 → 数据管理」），也可以关闭 iCloud 同步让训练数据仅保留在本机；健康数据始终只存本机。如需行使访问、更正、删除等权利，直接在应用内操作即可，无需向我们提出请求。</p>
-
-  <h2>10. 政策变更</h2>
-  <p>若本政策发生实质性变更，我们会在应用内以显眼方式告知，并更新本页顶部的「最后更新」日期。继续使用应用即表示你接受更新后的政策。</p>
-
-  <h2>11. 联系我们</h2>
-  <p>如对本政策或隐私保护有任何疑问，请通过 App Store 应用详情页中提供的开发者联系方式与我们联系。</p>
-
-  <section class="en" lang="en">
-    <h1>Progressive Load Privacy Policy</h1>
-    <p class="subtitle">We respect your privacy. This policy explains what information the app handles, why, and how you can manage it.</p>
-    <p class="updated">Last updated: October 18, 2026</p>
-
-    <div class="notice">
-      <strong>In short:</strong> Training data stays on your device by default; iCloud sync is off by default and covers training data only; health data always stays on this device; there are no third-party analytics, ads or tracking, and we operate no server that stores your data.
+  <section>
+    <div class="card">
+      <h2>1. 我们处理的信息</h2>
+      <ul>
+        <li><strong>训练档案（训练数据）：</strong>训练经验、训练目标、每周训练天数。</li>
+        <li><strong>身体基础信息（只存本机）：</strong>性别、出生日期、身高。</li>
+        <li><strong>训练数据：</strong>训练日与动作安排、训练场次、每一组的重量、次数、RIR、备注与完成情况。</li>
+        <li><strong>外部导入的训练记录：</strong>你从其他健身应用导入的历史训练记录（动作、组、重量、次数、完成时间等）。导入后它们成为本应用的训练记录，可在本应用内查看、统计与删除；删除只影响本应用中的副本。</li>
+        <li><strong>自定义内容：</strong>自定义器械名称与照片、自定义动作。</li>
+        <li><strong>健康数据（只存本机）：</strong>伤病部位与状态、运动前筛查、疼痛与不适（含每次训练的疼痛评分与是否仅为酸胀）、疲劳/睡眠/酸痛/压力/情绪自评、体重、健康评测。</li>
+        <li><strong>偏好设置：</strong>显示语言、显示单位（kg / lb）、主题色、提醒与休息计时设置。</li>
+      </ul>
+      <p>以上信息默认保存在你的设备本地。应用内部分为两个存储：「训练数据」（训练档案、训练安排与记录、外部导入记录、自定义内容、偏好设置）与「健康数据」（身体基础信息、伤病、筛查、疼痛、疲劳、体重、健康评测）。</p>
+      <p>「iCloud 数据同步」默认关闭，只同步「训练数据」。只有你在首次完成一次训练后看到提示并选择开启（或自行在「我的 → 数据管理」中打开）之后，这些训练数据才会存入你自己的 iCloud 私有数据库（由 Apple 运营），以便在你的多台设备之间同步。</p>
+      <p>开启前我们会明确告知同步的数据范围与隐私注意事项；你也可以随时关闭（关闭后训练数据仅留本机）。<strong>无论是否开启同步，健康数据都不会离开本机、不进入 iCloud；我们也不会收到、上传或收集你的任何数据到我们自己的服务器。</strong></p>
     </div>
 
-    <h2>1. Information We Handle</h2>
-    <ul>
-      <li><strong>Profile:</strong> sex, date of birth, height, training experience, goal, training days per week.</li>
-      <li><strong>Training data:</strong> training-day and exercise arrangements, sessions, and for each set the weight, reps, RIR and completion state.</li>
-      <li><strong>Custom content:</strong> custom equipment names and photos, custom exercises.</li>
-      <li><strong>Health data (stays on this device only):</strong> injuries, pre-exercise screening, pain and discomfort, fatigue/sleep/soreness/stress/mood, body weight, health check-ins.</li>
-      <li><strong>Preferences:</strong> display language, display unit (kg / lb), reminder and rest-timer settings.</li>
-    </ul>
-    <p>The above is stored on your device (the app sandbox database and files) by default.</p>
-    <p>Health data — injuries, pre-exercise screening, pain and discomfort, fatigue, body weight, health check-ins, and the health settings derived from them — <strong>always stays on this device and is never stored in iCloud</strong>.</p>
-    <p>"iCloud Data Sync" is off by default and applies only to training data (profile, training-day and exercise arrangements, sessions and sets, custom equipment and exercises, preferences). Only after you see the one-time prompt following your first completed workout — and choose to enable it — or turn it on yourself in "Profile → Data Management", will that training data also be kept in your own private iCloud database (operated by Apple) so it can sync across your devices. We tell you the exact data scope and privacy notes before you enable it, and you can turn it off at any time (training data then stays on this device only). Either way, health data never leaves this device, and we never receive, upload or collect your data on any server of ours.</p>
+    <div class="card">
+      <h2>2. 设备权限与用途</h2>
+      <ul>
+        <li><strong>相机（可选）：</strong>仅当你为自定义器械拍照时使用，照片保存在应用本地。</li>
+        <li><strong>照片库（可选）：</strong>仅当你从相册选择器械图片时使用，所选图片复制到应用本地。</li>
+        <li><strong>通知（可选）：</strong>用于训练提醒与组间休息到点提醒；拒绝后应用内功能不受影响，只是收不到提醒。</li>
+        <li><strong>系统闹钟（可选）：</strong>仅在「我的 → 设置」中开启「使用系统闹钟计时」后使用，用于组间休息的到点提醒。</li>
+        <li><strong>健康（仅 Apple Watch，可选）：</strong>手表仅在训练中请求该权限，用于让训练记录在你放下手腕或熄屏时持续运行（系统要求以「体能训练」会话保活）；<strong>不会读取或写入任何健康数据</strong>，你的 iPhone 主应用本身也不接触健康数据。</li>
+      </ul>
+      <p>所有权限都可以拒绝，拒绝后仅对应功能不可用，其余功能不受影响。应用不会在后台访问相机或相册。锁屏与灵动岛只显示组间休息倒计时，不涉及任何个人数据。</p>
+    </div>
 
-    <h2>2. Device Permissions and Purpose</h2>
-    <ul>
-      <li><strong>Camera (optional):</strong> used only when you take a photo for a custom equipment item; the photo is stored locally in the app.</li>
-      <li><strong>Photo Library (optional):</strong> used only when you pick an equipment image; the chosen image is copied into the app.</li>
-    </ul>
-    <p>Both permissions can be denied. If denied, only "custom equipment photo" is unavailable; everything else still works. The app never accesses the camera or photo library in the background.</p>
+    <div class="card">
+      <h2>3. 存储位置与保留期限</h2>
+      <p>所有数据默认保存在你的设备本地；若你开启 iCloud 同步，「训练数据」会同时保存在你的 iCloud 私有数据库，保留到你主动删除为止。「健康数据」始终只存本机，不进入 iCloud。</p>
+      <p>你可以在「我的 → 数据管理」中关闭 iCloud 数据同步（训练数据仅留本机），或使用「清空全部数据」（同时删除本机数据与 iCloud 中的训练数据，该操作不可撤销）。外部导入的记录可以单独删除，不影响本机原生记录。卸载应用会删除应用沙盒内的数据；如需一并清理 iCloud 中的副本，请在关闭同步后清空数据，或在 iOS「设置 → Apple 账户 → iCloud → 管理账户存储」中删除本应用的数据。</p>
+    </div>
 
-    <h2>3. Storage and Retention</h2>
-    <p>Training data stays on your device by default; if you enable iCloud sync, the same training data is also kept in your private iCloud database, until you delete it. Health data always stays on this device and never enters iCloud.</p>
-    <p>In "Profile → Data Management" you can turn iCloud Data Sync off (keeping training data on this device only) or use "Delete All Data" (which removes on-device data and your synced training data in iCloud; this cannot be undone). Deleting the app removes the app sandbox data; to also clear the iCloud copy, turn sync off and delete the data, or remove the app's data in iOS "Settings → Apple Account → iCloud → Manage Account Storage".</p>
+    <div class="card">
+      <h2>4. 数据导出与导入</h2>
+      <p>导出与导入由你主动发起：导出时，应用把数据整理成 JSON 文件，交由「系统文件/分享面板」保存到你选择的位置；导入时，应用通过「系统文件选择器」读取你选择的文件。整个过程不经过我们的服务器，我们无法查看这些文件的内容。</p>
+      <p>除本应用自己的备份文件外，应用还支持从其他健身应用的记录文件导入历史训练（见第 1 节）；导入前会显示对比与确认，导入的外部记录属于「训练数据」——开启 iCloud 同步后同样只在你的设备间同步。</p>
+      <p>请自行妥善保管导出的文件，其中包含你的训练与身体数据。</p>
+    </div>
 
-    <h2>4. Export and Import</h2>
-    <p>Export and import are always user-initiated. On export the app writes your data to a JSON file and hands it to the system file/share sheet to save wherever you choose. On import the app reads the file you pick through the system file picker. Nothing passes through our servers and we cannot see the contents of these files. Please keep exported files safe — they contain your training and body data.</p>
+    <div class="card">
+      <h2>5. 共享、广告与追踪</h2>
+      <p>我们不出售、不出租、不共享你的数据。应用不包含第三方分析、广告或社交 SDK，不进行跨应用追踪，不使用广告标识符（IDFA），也不会请求「允许 App 请求跟踪」授权。</p>
+      <p>涉及第三方（均为 Apple 服务）的环节只有两个：① iCloud 同步——训练数据由 Apple 的 iCloud 服务存储与传输（受 Apple 隐私政策与服务条款约束），我们无权访问其中的内容；② Apple Watch 的「体能训练」会话——仅用于让手表训练在后台持续运行，不产生、不保存任何健康数据。健康数据（伤病、筛查、疼痛、疲劳、体重、健康评测、性别、出生日期、身高）始终不参与以上任何一项。</p>
+    </div>
 
-    <h2>5. Sharing, Ads and Tracking</h2>
-    <p>We never sell, rent or share your data. The app contains no third-party analytics, advertising or social SDKs, performs no cross-app tracking, does not use the advertising identifier (IDFA) and never asks for App Tracking Transparency permission.</p>
-    <p>The only third party involved is iCloud sync: training data is stored and transmitted by Apple's iCloud service (subject to Apple's privacy policy and terms). We have no access to its contents, and health data is never synced.</p>
+    <div class="card">
+      <h2>6. 网络访问</h2>
+      <p>训练计划编排、记录、统计、导入/导出全部在本机完成，离线可用。以下情况会使用网络：</p>
+      <ul>
+        <li><strong>iCloud 数据同步（可选，默认关闭）：</strong>只有你主动开启后，才会把训练数据同步到你的 iCloud 私有数据库；健康数据始终不上传，可在「数据管理」中随时关闭。</li>
+        <li><strong>导出/导入：</strong>打开系统文件面板，由你选择位置（文件不经我们的服务器）。</li>
+        <li><strong>检查更新：</strong>点击「版本」时跳转 App Store。</li>
+      </ul>
+      <p>关闭 iCloud 同步后，日常使用完全不需要网络。</p>
+    </div>
 
-    <h2>6. Network Access</h2>
-    <p>Workout planning, logging, statistics and export/import all happen on device and work fully offline. Network is used only for:</p>
-    <ul>
-      <li><strong>iCloud Data Sync (optional, off by default):</strong> once you turn it on, training data syncs with your private iCloud database; health data is never uploaded. You can turn it off in Data Management at any time.</li>
-      <li><strong>Export/import:</strong> opens the system file panel where you choose the location (files never pass through our servers).</li>
-      <li><strong>Checking for updates:</strong> tapping "Version" opens the App Store.</li>
-    </ul>
-    <p>With iCloud sync off, day-to-day use needs no network at all.</p>
+    <div class="card">
+      <h2>7. 健康与医疗声明</h2>
+      <p>本应用提供一般训练信息与记录工具，不构成医疗建议，也不用于诊断或治疗。相关数据不代表临床结论。</p>
+      <p>如有孕期、心血管疾病、急性损伤、术后恢复期、关节置换或未控制的高血压等情况，请先咨询专业人士。</p>
+    </div>
 
-    <h2>7. Health and Medical Notice</h2>
-    <p>This app provides general training information and logging tools. It is not medical advice and is not intended to diagnose or treat any condition. The data shown is not a clinical conclusion.</p>
-    <p>If you are pregnant, or have cardiovascular disease, an acute injury, are recovering from surgery, have a joint replacement or uncontrolled hypertension, consult a professional first.</p>
+    <div class="card">
+      <h2>8. 儿童隐私</h2>
+      <p>本应用不面向 13 岁以下儿童，也不会主动收集儿童的个人信息。我们不运营服务器，也不收集应用内的数据，因此无法访问任何用户的数据。</p>
+    </div>
 
-    <h2>8. Children's Privacy</h2>
-    <p>This app is not directed to children under 13 and does not knowingly collect personal information from children. We do not operate a server or collect data from the app, so we cannot access any user's data.</p>
+    <div class="card">
+      <h2>9. 你的权利</h2>
+      <p>你可以随时查看、导出或删除全部数据（「我的 → 数据管理」），可以单独删除外部导入的记录，也可以关闭 iCloud 同步让训练数据仅保留在本机；健康数据始终只存本机。如需行使访问、更正、删除等权利，直接在应用内操作即可，无需向我们提出请求。</p>
+    </div>
 
-    <h2>9. Your Rights</h2>
-    <p>You can view, export or delete all of your data at any time (Profile → Data Management), and you can turn iCloud sync off to keep training data on this device only; health data always stays on this device. You can exercise access, correction and deletion rights directly in the app without contacting us.</p>
+    <div class="card">
+      <h2>10. 政策变更</h2>
+      <p>若本政策发生实质性变更，我们会在应用内以显眼方式告知，并更新本页顶部的「最后更新」日期。继续使用应用即表示你接受更新后的政策。</p>
+    </div>
 
-    <h2>10. Changes to This Policy</h2>
-    <p>If this policy changes materially we will notify you prominently in the app and update the "Last updated" date above. Continuing to use the app means you accept the updated policy.</p>
-
-    <h2>11. Contact Us</h2>
-    <p>If you have any questions about this policy or your privacy, please contact us using the developer contact details on the app's App Store page.</p>
+    <div class="card">
+      <h2>11. 联系我们</h2>
+      <p>如对本政策或隐私保护有任何疑问，请通过 App Store 应用详情页中提供的开发者联系方式，或技术支持页面（<a href="https://dragonlongpro.github.io/support/" style="color: var(--accent);">dragonlongpro.github.io/support</a>）中的邮箱与我们联系。</p>
+    </div>
   </section>
-</main>
+
+  <section>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">相关链接</h2>
+    <div class="links">
+      <a href="https://dragonlongpro.github.io/support/">技术支持页面</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>渐进负荷 ProgressiveLoad · 隐私政策 · 最后更新：2026 年 10 月 30 日</p>
+  </footer>
+
+  </div>
+
+  <!-- ========== English ========== -->
+  <div id="page-en" style="display:none">
+
+  <header>
+    <img class="app-icon" src="app-icon.png" alt="ProgressiveLoad app icon">
+    <h1>ProgressiveLoad</h1>
+    <p>Privacy Policy</p>
+  </header>
+
+  <div class="summary">
+    <strong>In short</strong>
+    The app keeps two separate on-device stores: "training data" stays on your device by default and syncs only via iCloud if you explicitly enable it; "health data" (including sex, date of birth and height) always stays on this device only. There are no third-party analytics, ads or tracking, and we operate no server that stores your data.
+  </div>
+  <p style="color: var(--text-secondary); font-size: 13px; text-align: center; margin-bottom: 10px;">Last updated: October 30, 2026</p>
+
+  <section>
+    <div class="card">
+      <h2>1. Information We Handle</h2>
+      <ul>
+        <li><strong>Training profile (training data):</strong> training experience, training goal, training days per week.</li>
+        <li><strong>Basic body info (this device only):</strong> sex, date of birth, height.</li>
+        <li><strong>Training data:</strong> training-day and exercise arrangements, sessions, and for each set the weight, reps, RIR, notes and completion state.</li>
+        <li><strong>Externally imported workout history:</strong> historical workout records (exercises, sets, weight, reps, completion times) that you import from other fitness apps. Once imported they become this app's training records: you can view, analyze and delete them in this app; deleting affects only the copy in this app.</li>
+        <li><strong>Custom content:</strong> custom equipment names and photos, custom exercises.</li>
+        <li><strong>Health data (this device only):</strong> injuries and their status, pre-exercise screening, pain and discomfort (including per-workout pain scores and soreness-only flags), fatigue/sleep/soreness/stress/mood check-ins, body weight, health check-ins.</li>
+        <li><strong>Preferences:</strong> display language, display unit (kg / lb), theme color, reminder and rest-timer settings.</li>
+      </ul>
+      <p>Everything above is stored on your device by default. The app uses two on-device stores: "training data" (training profile, plans and workout logs, externally imported records, custom content, preferences) and "health data" (basic body info, injuries, screening, pain, fatigue, body weight, health check-ins).</p>
+      <p>"iCloud Data Sync" is off by default and covers training data only. Only after you see the one-time prompt following your first completed workout — and choose to enable it — or turn it on yourself in "Profile → Data Management", will that training data also be kept in your own private iCloud database (operated by Apple) so it can sync across your devices. We tell you the exact data scope and privacy notes before you enable it, and you can turn it off at any time (training data then stays on this device only). <strong>Either way, health data never leaves this device and never enters iCloud; we never receive, upload or collect any of your data on any server of ours.</strong></p>
+    </div>
+
+    <div class="card">
+      <h2>2. Device Permissions and Purpose</h2>
+      <ul>
+        <li><strong>Camera (optional):</strong> used only when you take a photo for a custom equipment item; the photo is stored locally in the app.</li>
+        <li><strong>Photo Library (optional):</strong> used only when you pick an equipment image; the chosen image is copied into the app.</li>
+        <li><strong>Notifications (optional):</strong> used for training reminders and end-of-rest alerts. If denied, everything in the app still works — you just won't receive the alerts.</li>
+        <li><strong>System Alarm (optional):</strong> used only when you enable "Use system alarm for rest timing" in Profile → Settings, for end-of-rest alerts.</li>
+        <li><strong>Health (Apple Watch only, optional):</strong> requested on the watch during workouts only, so that logging continues while your wrist is down or the screen is off (the system requires an active "workout" session to keep the app running). <strong>No health data is read or written</strong>, and the iPhone app itself never touches health data.</li>
+      </ul>
+      <p>Every permission can be denied; denying one only disables the corresponding feature. The app never accesses the camera or photo library in the background. The Lock Screen and Dynamic Island show only the rest-timer countdown and no personal data.</p>
+    </div>
+
+    <div class="card">
+      <h2>3. Storage and Retention</h2>
+      <p>All data stays on your device by default; if you enable iCloud sync, your training data is also kept in your private iCloud database until you delete it. Health data always stays on this device and never enters iCloud.</p>
+      <p>In "Profile → Data Management" you can turn iCloud Data Sync off (keeping training data on this device only) or use "Delete All Data" (which removes on-device data and your synced training data in iCloud; this cannot be undone). Externally imported records can be deleted separately without affecting your native records. Deleting the app removes the app sandbox data; to also clear the iCloud copy, turn sync off and delete the data, or remove the app's data in iOS "Settings → Apple Account → iCloud → Manage Account Storage".</p>
+    </div>
+
+    <div class="card">
+      <h2>4. Export and Import</h2>
+      <p>Export and import are always user-initiated. On export the app writes your data to a JSON file and hands it to the system file/share sheet to save wherever you choose. On import the app reads the file you pick through the system file picker. Nothing passes through our servers and we cannot see the contents of these files.</p>
+      <p>Besides this app's own backup files, the app can also import historical workouts from record files of other fitness apps (see Section 1). Before importing you see a comparison and confirmation; imported records count as training data — with iCloud sync on, they likewise sync only between your own devices.</p>
+      <p>Please keep exported files safe — they contain your training and body data.</p>
+    </div>
+
+    <div class="card">
+      <h2>5. Sharing, Ads and Tracking</h2>
+      <p>We never sell, rent or share your data. The app contains no third-party analytics, advertising or social SDKs, performs no cross-app tracking, does not use the advertising identifier (IDFA) and never asks for App Tracking Transparency permission.</p>
+      <p>Only two third-party touches exist (both Apple services): ① iCloud sync — training data is stored and transmitted by Apple's iCloud service (subject to Apple's privacy policy and terms); we have no access to its contents. ② The Apple Watch "workout" session — used solely to keep watch logging alive in the background; it produces and saves no health data. Health data (injuries, screening, pain, fatigue, body weight, health check-ins, sex, date of birth, height) never participates in either.</p>
+    </div>
+
+    <div class="card">
+      <h2>6. Network Access</h2>
+      <p>Workout planning, logging, statistics and import/export all happen on device and work fully offline. Network is used only for:</p>
+      <ul>
+        <li><strong>iCloud Data Sync (optional, off by default):</strong> once you turn it on, training data syncs with your private iCloud database; health data is never uploaded. You can turn it off in Data Management at any time.</li>
+        <li><strong>Export/import:</strong> opens the system file panel where you choose the location (files never pass through our servers).</li>
+        <li><strong>Checking for updates:</strong> tapping "Version" opens the App Store.</li>
+      </ul>
+      <p>With iCloud sync off, day-to-day use needs no network at all.</p>
+    </div>
+
+    <div class="card">
+      <h2>7. Health and Medical Notice</h2>
+      <p>This app provides general training information and logging tools. It is not medical advice and is not intended to diagnose or treat any condition. The data shown is not a clinical conclusion.</p>
+      <p>If you are pregnant, or have cardiovascular disease, an acute injury, are recovering from surgery, have a joint replacement or uncontrolled hypertension, consult a professional first.</p>
+    </div>
+
+    <div class="card">
+      <h2>8. Children's Privacy</h2>
+      <p>This app is not directed to children under 13 and does not knowingly collect personal information from children. We do not operate a server or collect data from the app, so we cannot access any user's data.</p>
+    </div>
+
+    <div class="card">
+      <h2>9. Your Rights</h2>
+      <p>You can view, export or delete all of your data at any time (Profile → Data Management), delete externally imported records separately, and turn iCloud sync off to keep training data on this device only; health data always stays on this device. You can exercise access, correction and deletion rights directly in the app without contacting us.</p>
+    </div>
+
+    <div class="card">
+      <h2>10. Changes to This Policy</h2>
+      <p>If this policy changes materially we will notify you prominently in the app and update the "Last updated" date above. Continuing to use the app means you accept the updated policy.</p>
+    </div>
+
+    <div class="card">
+      <h2>11. Contact Us</h2>
+      <p>If you have any questions about this policy or your privacy, please reach us via the developer contact details on the app's App Store page, or via the email on our support page (<a href="https://dragonlongpro.github.io/support/" style="color: var(--accent);">dragonlongpro.github.io/support</a>).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">Links</h2>
+    <div class="links">
+      <a href="https://dragonlongpro.github.io/support/">Support Page</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>ProgressiveLoad · Privacy Policy · Last updated: October 30, 2026</p>
+  </footer>
+
+  </div>
+
+</div>
+
+<script>
+  function applyLang(lang) {
+    var zh = document.getElementById('page-zh');
+    var en = document.getElementById('page-en');
+    var btn = document.getElementById('langToggle');
+    if (lang === 'en') {
+      zh.style.display = 'none';
+      en.style.display = 'block';
+      btn.textContent = '中文';
+      document.documentElement.lang = 'en';
+    } else {
+      zh.style.display = 'block';
+      en.style.display = 'none';
+      btn.textContent = 'EN';
+      document.documentElement.lang = 'zh-Hans';
+    }
+  }
+  function toggleLang() {
+    var zhVisible = document.getElementById('page-zh').style.display !== 'none';
+    var lang = zhVisible ? 'en' : 'zh';
+    try { localStorage.setItem('privacy-lang', lang); } catch (e) {}
+    applyLang(lang);
+    window.scrollTo(0, 0);
+  }
+  (function () {
+    var lang = null;
+    try { lang = localStorage.getItem('privacy-lang'); } catch (e) {}
+    if (!lang) {
+      lang = (navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    applyLang(lang);
+  })();
+</script>
 </body>
 </html>

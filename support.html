@@ -146,11 +146,11 @@
       <summary>开启 iCloud 同步后数据没有同步到其他设备</summary>
       <p>iCloud 同步只同步训练数据（档案、训练计划、训练记录、自定义器械与动作、偏好设置），健康数据始终只保存在本机。请确认：</p>
       <ul>
-        <li>两台设备使用同一个 Apple 账户，且均已开启 iCloud 同步（我的 → 数据管理）。</li>
+        <li>两台设备使用同一个 Apple 账户，且都已开启同步（我的 → 数据管理 → iCloud 数据同步）。</li>
         <li>iCloud 云盘已开启：iOS 设置 → Apple 账户 → iCloud → 确保「iCloud 云盘」打开。</li>
-        <li>同步可能需要几分钟，请稍候并在两台设备上都重启一次应用。</li>
+        <li>同步可能需要几分钟，可在「数据管理」页查看同步状态或点「立即同步」，并在两台设备上都重启一次应用。</li>
       </ul>
-      <p>若仍不生效，可在一台设备上导出 JSON 备份（我的 → 数据管理 → 导出），在另一台设备导入。</p>
+      <p>若仍不生效，可在一台设备上导出 JSON 备份（我的 → 数据管理 → 导出文件），在另一台设备导入。</p>
     </details>
 
     <details>
@@ -160,12 +160,22 @@
 
     <details>
       <summary>训练提醒的时间是怎么定的</summary>
-      <p>提醒跟随你真实排定的训练日：由未来 7 天内已安排的训练日计算提醒时点。调整训练日安排后提醒会自动重排；把某天设为休息日即不再提醒。</p>
+      <p>提醒跟随你真实排定的训练日：由未来 7 天内已安排的训练日计算提醒时点。调整训练日安排后提醒会自动重排；把某天设为休息日即不再提醒。可在 我的 → 设置 → 训练提醒 中关闭。</p>
     </details>
 
     <details>
       <summary>如何备份或迁移数据</summary>
-      <p>我的 → 数据管理 → 导出，可生成完整数据的 JSON 文件，保存到「文件」App 或发送到自己。新设备上选择导入即可恢复；导入为全覆盖语义，会先显示差异对比并需要二次确认。建议定期导出备份。</p>
+      <p>我的 → 数据管理 → 导出文件，可生成包含全部数据的 JSON 文件，保存到「文件」App 或发送给自己，建议定期导出备份。新设备上选择「导入文件」即可恢复：导入会替换现有全部数据，执行前先显示对比并需要你二次确认，导入前会自动生成本机备份。页面底部的「最近自动备份」可在需要时找回。</p>
+    </details>
+
+    <details>
+      <summary>如何把其他健身 App 的记录导入</summary>
+      <p>我的 → 数据管理 → 导入其他 App 记录，选择其他健身应用导出的记录文件即可。导入只追加训练历史、不覆盖现有数据，导入的记录会计入统计；如需要清除，可在同页「删除其他 App 的记录」单独删除，不影响你自己记录的数据。</p>
+    </details>
+
+    <details>
+      <summary>建议的重量是怎么算出来的</summary>
+      <p>建议基于你最近一次同动作的训练记录，按渐进超负荷原则给出：RIR（最后一组还能多做几次）、目标完成度、疼痛与次日反应都会参与判定。每条建议卡片上都直接写着规则名称和理由，并给出「采用 / 不采用」选择——最终以你的实际记录为准。</p>
     </details>
 
     <details>
@@ -174,18 +184,18 @@
     </details>
 
     <details>
+      <summary>界面颜色能换吗</summary>
+      <p>可以。我的 → 设置 → 主题：单击空槽位选色、单击已存颜色立即应用；点第一个预置蓝色槽即可恢复默认。主题色会跟随 iCloud 同步到其他设备。</p>
+    </details>
+
+    <details>
       <summary>想重新开始，如何清空数据</summary>
-      <p>我的 → 数据管理 → 清空全部数据。该操作会删除本机全部数据（含 iCloud 中的同步数据），不可撤销，执行前建议先导出备份。</p>
+      <p>我的 → 数据管理 → 清空全部数据。清空前会自动生成本机备份；该操作会删除全部数据（含 iCloud 中的训练数据），不可撤销，清空后会进入新手引导。</p>
     </details>
 
     <details>
       <summary>Apple Watch 如何使用</summary>
-      <p>在 iPhone 上安装应用后，Watch 端会自动安装。手表可独立完成训练记录，结束后通过待导入记录同步回 iPhone；也可以在手表上记录有氧。请保持手表与 iPhone 的蓝牙连接。</p>
-    </details>
-
-    <details>
-      <summary>建议的重量是怎么算出来的</summary>
-      <p>建议基于你最近一次同动作的训练记录，按渐进超负荷原则给出（RIR、完成度、疼痛与次日反应都会参与判定）。每个判定参数都有公开研究依据，可在应用内「我的 → 参考来源」查看。</p>
+      <p>在 iPhone 上安装应用后，Watch 端会自动安装。手表可独立完成训练记录，结束后在 iPhone「我的 → 待导入记录」中同步回手机；也可以在手表上记录有氧。请保持手表与 iPhone 的蓝牙连接。</p>
     </details>
   </section>
 
@@ -238,26 +248,36 @@
       <summary>Data is not syncing to my other device after enabling iCloud sync</summary>
       <p>iCloud sync covers training data only (profile, plans, workout logs, custom equipment/exercises, preferences). Health data always stays on each device. Please check:</p>
       <ul>
-        <li>Both devices are signed in to the same Apple Account and have iCloud sync enabled (Profile → Data Management).</li>
+        <li>Both devices are signed in to the same Apple Account and have sync enabled (Profile → Data Management → iCloud Data Sync).</li>
         <li>iCloud Drive is on: iOS Settings → Apple Account → iCloud → make sure "iCloud Drive" is enabled.</li>
-        <li>Sync can take a few minutes. Relaunch the app on both devices.</li>
+        <li>Sync can take a few minutes. Check the sync status on the Data Management page or tap "Sync Now", and relaunch the app on both devices.</li>
       </ul>
-      <p>If it still fails, export a JSON backup on one device (Profile → Data Management → Export) and import it on the other.</p>
+      <p>If it still fails, export a JSON backup on one device (Profile → Data Management → Export File) and import it on the other.</p>
     </details>
 
     <details>
       <summary>No alert when the rest timer finishes</summary>
-      <p>The end-of-rest alert relies on system notifications. Check iOS Settings → Notifications → ProgressiveLoad and make sure notifications and sounds are allowed. If "Use system alarm for rest timing" is enabled in the app (Profile → Settings), the alert is handled by the system alarm — make sure the alarm permission is granted as well.</p>
+      <p>The end-of-rest alert relies on system notifications. Check iOS Settings → Notifications → ProgressiveLoad and make sure notifications and sounds are allowed. If "Use System Alarm Timer" is enabled in the app (Profile → Settings), the alert is handled by the system alarm — make sure the alarm permission is granted as well.</p>
     </details>
 
     <details>
       <summary>How are training reminders scheduled</summary>
-      <p>Reminders follow your actual schedule: they are computed from training days you have planned in the next 7 days. Changing your plan re-schedules them automatically; setting a day to rest stops its reminder.</p>
+      <p>Reminders follow your actual schedule: they are computed from training days you have planned in the next 7 days. Changing your plan re-schedules them automatically; setting a day to rest stops its reminder. You can turn reminders off in Profile → Settings → Training Reminders.</p>
     </details>
 
     <details>
       <summary>How to back up or migrate my data</summary>
-      <p>Profile → Data Management → Export produces a complete JSON file you can save to the Files app or send to yourself. Import it on a new device to restore. Importing is full-replace: it shows a diff first and asks for confirmation. We recommend exporting backups regularly.</p>
+      <p>Profile → Data Management → Export File produces a complete JSON file you can save to the Files app or send to yourself — we recommend exporting regularly. On a new device, choose "Import File" to restore: importing replaces all current data, shows a comparison and asks for your confirmation first, and an automatic local backup is created before it runs. The "Latest Auto Backup" row at the bottom of the page lets you recover when needed.</p>
+    </details>
+
+    <details>
+      <summary>How to import my history from another fitness app</summary>
+      <p>Profile → Data Management → Import from Another App, then pick the record file exported by your other fitness app. Importing only appends workout history and never overwrites your existing data; imported workouts count toward your statistics. To remove them later, use "Delete Imported Records" on the same page — your own logged data is not affected.</p>
+    </details>
+
+    <details>
+      <summary>How are the suggested weights calculated</summary>
+      <p>Suggestions are based on your most recent performance of the same exercise, following progressive overload principles: RIR (how many more reps you had left), target completion, pain and next-day response all factor in. Every suggestion card shows the rule name and its reason, with "Adopt / Dismiss" choices — your actual logged performance always comes first.</p>
     </details>
 
     <details>
@@ -266,18 +286,18 @@
     </details>
 
     <details>
+      <summary>Can I change the accent color</summary>
+      <p>Yes. Profile → Settings → Theme: tap an empty slot to pick a color, tap a saved color to apply it instantly; tap the first preset blue slot to restore the default. The theme color syncs to your other devices via iCloud.</p>
+    </details>
+
+    <details>
       <summary>How to start over and erase all data</summary>
-      <p>Profile → Data Management → Delete All Data. This removes everything on the device (including synced iCloud data) and cannot be undone. Export a backup first.</p>
+      <p>Profile → Data Management → Delete All Data. An automatic local backup is created first; the wipe removes everything (including synced training data in iCloud) and cannot be undone, and the app returns to the onboarding flow afterwards.</p>
     </details>
 
     <details>
       <summary>How to use the Apple Watch app</summary>
-      <p>The Watch app installs automatically once the iPhone app is installed. You can log a full workout on the watch and sync it back via pending imports; cardio can also be logged on the watch. Keep Bluetooth on between watch and iPhone.</p>
-    </details>
-
-    <details>
-      <summary>How are the suggested weights calculated</summary>
-      <p>Suggestions are based on your most recent performance of the same exercise, following progressive overload principles (RIR, completion, pain and next-day response all factor in). Every judging parameter is backed by published research — see "References" in the app (Profile → References).</p>
+      <p>The Watch app installs automatically once the iPhone app is installed. You can log a full workout on the watch and sync it back via "Profile → Pending Imports" on the iPhone; cardio can also be logged on the watch. Keep Bluetooth on between watch and iPhone.</p>
     </details>
   </section>
 

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>渐进负荷 · 技术支持</title>
+<meta name="description" content="渐进负荷（ProgressiveLoad）技术支持页面：常见问题、使用帮助与联系方式。">
+<style>
+  :root {
+    --bg: #ffffff;
+    --card: #f2f2f7;
+    --text: #1c1c1e;
+    --text-secondary: #6c6c70;
+    --accent: #007aff;
+    --separator: rgba(60, 60, 67, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --card: #1c1c1e;
+      --text: #ffffff;
+      --text-secondary: #98989d;
+      --accent: #0a84ff;
+      --separator: rgba(84, 84, 88, 0.5);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 24px 20px 64px; }
+  .lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    background: var(--card);
+    color: var(--accent);
+    border: none;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .lang-toggle:active { opacity: 0.6; }
+  header { text-align: center; padding: 32px 0 24px; }
+  header h1 { font-size: 28px; font-weight: 700; }
+  header p { color: var(--text-secondary); margin-top: 8px; font-size: 15px; }
+  section { margin-top: 32px; }
+  h2 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  details {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  summary {
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "›";
+    float: right;
+    color: var(--text-secondary);
+    transition: transform 0.2s;
+  }
+  details[open] summary::after { transform: rotate(90deg); }
+  details p { margin-top: 10px; font-size: 15px; color: var(--text); }
+  details ul { margin: 10px 0 0 20px; font-size: 15px; }
+  .links a {
+    display: block;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .links a::after { content: " ›"; color: var(--text-secondary); }
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .qr-item {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .qr-item img {
+    width: 100%;
+    max-width: 180px;
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto;
+  }
+  .qr-item .qr-name { font-weight: 600; margin-top: 12px; font-size: 16px; }
+  .qr-item .qr-note { color: var(--text-secondary); font-size: 13px; margin-top: 4px; }
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--separator);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+<div class="container">
+
+  <!-- ========== 中文 ========== -->
+  <div id="page-zh">
+
+  <header>
+    <h1>渐进负荷</h1>
+    <p>力量训练记录与渐进负荷建议 · 技术支持</p>
+  </header>
+
+  <section>
+    <h2>常见问题</h2>
+
+    <details>
+      <summary>开启 iCloud 同步后数据没有同步到其他设备</summary>
+      <p>iCloud 同步只同步训练数据（档案、训练计划、训练记录、自定义器械与动作、偏好设置），健康数据始终只保存在本机。请确认：</p>
+      <ul>
+        <li>两台设备使用同一个 Apple 账户，且均已开启 iCloud 同步（我的 → 数据管理）。</li>
+        <li>iCloud 云盘已开启：iOS 设置 → Apple 账户 → iCloud → 确保「iCloud 云盘」打开。</li>
+        <li>同步可能需要几分钟，请稍候并在两台设备上都重启一次应用。</li>
+      </ul>
+      <p>若仍不生效，可在一台设备上导出 JSON 备份（我的 → 数据管理 → 导出），在另一台设备导入。</p>
+    </details>
+
+    <details>
+      <summary>组间休息结束没有提醒</summary>
+      <p>到点提醒依赖系统通知。请检查 iOS 设置 → 通知 → 渐进负荷，确认「允许通知」已打开并开启声音。若你在应用内开启了「使用系统闹钟计时」（我的 → 设置），提醒由系统闹钟负责，请同时确认闹钟权限。</p>
+    </details>
+
+    <details>
+      <summary>训练提醒的时间是怎么定的</summary>
+      <p>提醒跟随你真实排定的训练日：由未来 7 天内已安排的训练日计算提醒时点。调整训练日安排后提醒会自动重排；把某天设为休息日即不再提醒。</p>
+    </details>
+
+    <details>
+      <summary>如何备份或迁移数据</summary>
+      <p>我的 → 数据管理 → 导出，可生成完整数据的 JSON 文件，保存到「文件」App 或发送到自己。新设备上选择导入即可恢复；导入为全覆盖语义，会先显示差异对比并需要二次确认。建议定期导出备份。</p>
+    </details>
+
+    <details>
+      <summary>重量单位怎么切换</summary>
+      <p>我的 → 设置 → 显示单位，可在 kg 与 lb 之间切换。切换只影响显示，数据本身按原值保留，可随时切回。</p>
+    </details>
+
+    <details>
+      <summary>想重新开始，如何清空数据</summary>
+      <p>我的 → 数据管理 → 清空全部数据。该操作会删除本机全部数据（含 iCloud 中的同步数据），不可撤销，执行前建议先导出备份。</p>
+    </details>
+
+    <details>
+      <summary>Apple Watch 如何使用</summary>
+      <p>在 iPhone 上安装应用后，Watch 端会自动安装。手表可独立完成训练记录，结束后通过待导入记录同步回 iPhone；也可以在手表上记录有氧。请保持手表与 iPhone 的蓝牙连接。</p>
+    </details>
+
+    <details>
+      <summary>建议的重量是怎么算出来的</summary>
+      <p>建议基于你最近一次同动作的训练记录，按渐进超负荷原则给出（RIR、完成度、疼痛与次日反应都会参与判定）。每个判定参数都有公开研究依据，可在应用内「我的 → 参考来源」查看。</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>相关链接</h2>
+    <div class="links">
+      <a href="https://dragonlongpro.github.io/privacy/">隐私政策</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>联系我们</h2>
+    <p style="color: var(--text-secondary); font-size: 15px;">使用过程中遇到任何问题，或有任何建议，欢迎通过以下方式联系。工作时间：周一至周五（工作日），法定节假日及周末休息。</p>
+    <div class="links">
+      <a href="mailto:yjworks@foxmail.com">邮箱：yjworks@foxmail.com</a>
+    </div>
+    <div class="qr-grid">
+      <div class="qr-item">
+        <img src="wechat-qr.png" alt="微信二维码">
+        <div class="qr-name">微信</div>
+        <div class="qr-note">扫码添加，备注「渐进负荷」</div>
+      </div>
+      <div class="qr-item">
+        <img src="xiaohongshu-qr.png" alt="小红书二维码">
+        <div class="qr-name">小红书</div>
+        <div class="qr-note">扫码关注，获取更新与教程</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>渐进负荷 ProgressiveLoad · 技术支持页面 · 最后更新：2026 年 10 月 30 日</p>
+  </footer>
+
+  </div>
+
+  <!-- ========== English ========== -->
+  <div id="page-en" style="display:none">
+
+  <header>
+    <h1>ProgressiveLoad</h1>
+    <p>Strength training log with progressive overload guidance · Support</p>
+  </header>
+
+  <section>
+    <h2>Frequently Asked Questions</h2>
+
+    <details>
+      <summary>Data is not syncing to my other device after enabling iCloud sync</summary>
+      <p>iCloud sync covers training data only (profile, plans, workout logs, custom equipment/exercises, preferences). Health data always stays on each device. Please check:</p>
+      <ul>
+        <li>Both devices are signed in to the same Apple Account and have iCloud sync enabled (Profile → Data Management).</li>
+        <li>iCloud Drive is on: iOS Settings → Apple Account → iCloud → make sure "iCloud Drive" is enabled.</li>
+        <li>Sync can take a few minutes. Relaunch the app on both devices.</li>
+      </ul>
+      <p>If it still fails, export a JSON backup on one device (Profile → Data Management → Export) and import it on the other.</p>
+    </details>
+
+    <details>
+      <summary>No alert when the rest timer finishes</summary>
+      <p>The end-of-rest alert relies on system notifications. Check iOS Settings → Notifications → ProgressiveLoad and make sure notifications and sounds are allowed. If "Use system alarm for rest timing" is enabled in the app (Profile → Settings), the alert is handled by the system alarm — make sure the alarm permission is granted as well.</p>
+    </details>
+
+    <details>
+      <summary>How are training reminders scheduled</summary>
+      <p>Reminders follow your actual schedule: they are computed from training days you have planned in the next 7 days. Changing your plan re-schedules them automatically; setting a day to rest stops its reminder.</p>
+    </details>
+
+    <details>
+      <summary>How to back up or migrate my data</summary>
+      <p>Profile → Data Management → Export produces a complete JSON file you can save to the Files app or send to yourself. Import it on a new device to restore. Importing is full-replace: it shows a diff first and asks for confirmation. We recommend exporting backups regularly.</p>
+    </details>
+
+    <details>
+      <summary>How to switch weight units</summary>
+      <p>Profile → Settings → Display Unit, switch between kg and lb. Only the display changes; the stored values are untouched and you can switch back anytime.</p>
+    </details>
+
+    <details>
+      <summary>How to start over and erase all data</summary>
+      <p>Profile → Data Management → Delete All Data. This removes everything on the device (including synced iCloud data) and cannot be undone. Export a backup first.</p>
+    </details>
+
+    <details>
+      <summary>How to use the Apple Watch app</summary>
+      <p>The Watch app installs automatically once the iPhone app is installed. You can log a full workout on the watch and sync it back via pending imports; cardio can also be logged on the watch. Keep Bluetooth on between watch and iPhone.</p>
+    </details>
+
+    <details>
+      <summary>How are the suggested weights calculated</summary>
+      <p>Suggestions are based on your most recent performance of the same exercise, following progressive overload principles (RIR, completion, pain and next-day response all factor in). Every judging parameter is backed by published research — see "References" in the app (Profile → References).</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>Links</h2>
+    <div class="links">
+      <a href="https://dragonlongpro.github.io/privacy/">Privacy Policy</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact Us</h2>
+    <p style="color: var(--text-secondary); font-size: 15px;">Questions or feedback? Reach us via the channels below. Working hours: Monday to Friday (business days); closed on weekends and public holidays.</p>
+    <div class="links">
+      <a href="mailto:yjworks@foxmail.com">Email: yjworks@foxmail.com</a>
+    </div>
+    <div class="qr-grid">
+      <div class="qr-item">
+        <img src="wechat-qr.png" alt="WeChat QR code">
+        <div class="qr-name">WeChat</div>
+        <div class="qr-note">Scan to add; mention "ProgressiveLoad"</div>
+      </div>
+      <div class="qr-item">
+        <img src="xiaohongshu-qr.png" alt="Xiaohongshu (RED) QR code">
+        <div class="qr-name">Xiaohongshu (RED)</div>
+        <div class="qr-note">Scan to follow for updates and tips</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>ProgressiveLoad · Support Page · Last updated: October 30, 2026</p>
+  </footer>
+
+  </div>
+
+</div>
+
+<script>
+  function applyLang(lang) {
+    var zh = document.getElementById('page-zh');
+    var en = document.getElementById('page-en');
+    var btn = document.getElementById('langToggle');
+    if (lang === 'en') {
+      zh.style.display = 'none';
+      en.style.display = 'block';
+      btn.textContent = '中文';
+      document.documentElement.lang = 'en';
+    } else {
+      zh.style.display = 'block';
+      en.style.display = 'none';
+      btn.textContent = 'EN';
+      document.documentElement.lang = 'zh-Hans';
+    }
+  }
+  function toggleLang() {
+    var zhVisible = document.getElementById('page-zh').style.display !== 'none';
+    var lang = zhVisible ? 'en' : 'zh';
+    try { localStorage.setItem('support-lang', lang); } catch (e) {}
+    applyLang(lang);
+    window.scrollTo(0, 0);
+  }
+  (function () {
+    var lang = null;
+    try { lang = localStorage.getItem('support-lang'); } catch (e) {}
+    if (!lang) {
+      lang = (navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    applyLang(lang);
+  })();
+</script>
+</body>
+</html>

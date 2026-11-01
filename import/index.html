@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>渐进负荷 · 导入其他 App 记录</title>
+<meta name="description" content="渐进负荷（ProgressiveLoad）导入其他训练 App 历史记录的使用步骤：用 AI 助手生成导入文件，再在 App 内一键迁移，只追加不覆盖。">
+<style>
+  :root {
+    --bg: #ffffff;
+    --card: #f2f2f7;
+    --text: #1c1c1e;
+    --text-secondary: #6c6c70;
+    --accent: #007aff;
+    --separator: rgba(60, 60, 67, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --card: #1c1c1e;
+      --text: #ffffff;
+      --text-secondary: #98989d;
+      --accent: #0a84ff;
+      --separator: rgba(84, 84, 88, 0.5);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 24px 20px 64px; }
+  .lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+    background: var(--card);
+    color: var(--accent);
+    border: none;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .lang-toggle:active { opacity: 0.6; }
+  header { text-align: center; padding: 32px 0 24px; }
+  header .app-icon {
+    width: 88px;
+    height: 88px;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto 16px;
+  }
+  header h1 { font-size: 28px; font-weight: 700; }
+  header p { color: var(--text-secondary); margin-top: 8px; font-size: 15px; }
+  section { margin-top: 32px; }
+  h2 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .card p { font-size: 15px; }
+  .card p + p { margin-top: 8px; }
+  .card .muted { color: var(--text-secondary); font-size: 14px; }
+  ol.steps { list-style: none; counter-reset: step; }
+  ol.steps li {
+    counter-increment: step;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 16px 14px 52px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    position: relative;
+  }
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ol.steps li b { font-weight: 600; }
+  ol.steps li .sub { color: var(--text-secondary); font-size: 14px; margin-top: 4px; }
+  .download-btn {
+    display: block;
+    background: var(--accent);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .download-btn:active { opacity: 0.7; }
+  .download-inline { margin: 10px 0 0; font-size: 15px; padding: 12px; border-radius: 10px; }
+  li .download-note { text-align: left; margin-top: 6px; }
+  .download-note { text-align: center; color: var(--text-secondary); font-size: 13px; margin-top: -4px; margin-bottom: 10px; }
+  details {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  summary {
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "›";
+    float: right;
+    color: var(--text-secondary);
+    transition: transform 0.2s;
+  }
+  details[open] summary::after { transform: rotate(90deg); }
+  details p { margin-top: 10px; font-size: 15px; }
+  details ul { margin: 10px 0 0 20px; font-size: 15px; }
+  .links a {
+    display: block;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .links a::after { content: " ›"; color: var(--text-secondary); }
+  .step-figure {
+    margin: 8px 0 4px;
+    text-align: center;
+  }
+  .step-figure img {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--separator);
+    display: block;
+    margin: 0 auto;
+  }
+  .step-figure .fig-note { color: var(--text-secondary); font-size: 12px; margin-top: 6px; }
+  code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.92em;
+    background: var(--separator);
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--separator);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+<div class="container">
+
+  <!-- ========== 中文 ========== -->
+  <div id="page-zh">
+
+  <header>
+    <img class="app-icon" src="app-icon.png" alt="渐进负荷 App 图标">
+    <h1>渐进负荷</h1>
+    <p>专注个人健身力量训练记录原生级APP<br>导入其他 App 记录 · 使用步骤</p>
+  </header>
+
+  <section>
+    <h2>这是什么</h2>
+    <div class="card">
+      <p>把你在其他训练 App（如 Hevy、训记等）里的<strong>历史训练记录</strong>迁移到「渐进负荷」：力量训练会按动作和每一组的重量、次数完整导入，有氧记录按分钟数导入。</p>
+      <p class="muted">导入只追加训练记录，不影响你的档案、训练计划和已有数据；同一天有重叠时会先询问你保留哪一份。</p>
+      <p class="muted">适用于能让 AI 读取到按组训练记录的 App（以训记为例，其他 App 流程相同）。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>使用步骤</h2>
+    <ol class="steps">
+      <li><b>在原训练 App 里获取 Skill 文档</b><div class="sub">在要导出的 App 中找到「Skill / Agent 数据导出」入口（以训记为例：<strong>我的 → 数据导出和导入</strong>），把它的 Skill 文档导出（可发到微信文件再转存电脑）。各 App 入口位置可能不同。</div>
+        <div class="step-figure"><img src="step-1-source-app.png" alt="训记 App：我的 → 数据导出和导入"><div class="fig-note">训记 App：我的 → 数据导出和导入</div></div>
+        <div class="step-figure"><img src="step-2-export-skills.png" alt="导出 Skill 文档到微信文件"><div class="fig-note">导出 Skill 文档（文件已含访问 Key）</div></div></li>
+      <li><b>把 Skill 文档发给电脑端的 AI Agent</b><div class="sub">在<strong>电脑端</strong>打开 AI Agent 软件（如 Kimi Work、DeepSeek Harness、WorkBuddy 等支持 Skill 的客户端，网页对话版不适用），把上一步的 Skill 文档拖进对话发送。它询问用途时直接点<strong>「跳过」</strong>。</div>
+        <div class="step-figure"><img src="step-3-agent-skip.png" alt="AI Agent 询问用途时点跳过"><div class="fig-note">AI 询问用途时，点「跳过」即可</div></div></li>
+      <li><b>再发送导入 skill 并生成 JSON</b><div class="sub">先把 <code>progressive-load-import.skill.md</code>（下方按钮下载）拖进同一对话发送。AI 会自动把动作名匹配到「渐进负荷」的内置动作，稍等片刻即可收到 <code>progressive_load_import_日期.json</code> 导入文件和一段导入说明。</div>
+        <a class="download-btn download-inline" href="progressive-load-import.skill.md" download>下载 progressive-load-import.skill.md</a>
+        <p class="download-note">7.6 KB · 保存后在下一步拖进 AI 对话</p>
+        <div class="step-figure"><img src="step-4-json-result.png" alt="AI 生成 JSON 导入文件"><div class="fig-note">生成的 JSON 导入文件（示例）</div></div></li>
+      <li><b>把 JSON 文件保存到 iPhone / iPad</b><div class="sub">用微信文件传输、隔空投送或邮件把 <code>.json</code> 文件发到手机，在手机上用「文件」App 保存（文件名需以 <code>.json</code> 结尾）。</div></li>
+      <li><b>在「渐进负荷」里导入</b><div class="sub">打开「渐进负荷」→ 底部「我的」→「数据管理」→「<strong>导入其他 App 记录</strong>」，选中刚保存的 JSON 文件。</div></li>
+      <li><b>处理日期重叠（如有）</b><div class="sub">遇到已存在的日期时按提示选择：不确定就选「保留原数据」，不会删除任何已有记录。</div></li>
+      <li><b>完成</b><div class="sub">看到「成功导入 X 天数据」即完成。如需撤销，可在「数据管理」→「删除其他 App 的记录」一键移除本次导入的全部记录。</div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>常见问题</h2>
+    <details>
+      <summary>能导入哪些内容？</summary>
+      <ul>
+        <li>力量训练：日期、动作（自动匹配内置动作与器械）、每组的重量与次数；</li>
+        <li>有氧：按天汇总的分钟数与类型说明；</li>
+        <li>组间休息、RPE、备注等细节不迁移（源数据不含这些口径）。</li>
+      </ul>
+    </details>
+    <details>
+      <summary>「导入文件」和「导入其他 App 记录」有什么区别？</summary>
+      <p>「导入文件」是<strong>全量替换</strong>：先删除本机全部数据再采用文件内容，用于恢复备份。「导入其他 App 记录」只<strong>追加</strong>训练记录，用于从别的 App 迁移历史。两者不要混淆。</p>
+    </details>
+    <details>
+      <summary>同一个文件重复导入会怎样？</summary>
+      <p>同一天的数据重叠时会弹出选择：保留原数据、采用新记录或保留两者。不确定就选「保留原数据」，不会丢任何记录。</p>
+    </details>
+    <details>
+      <summary>AI 生成的文件导入失败怎么办？</summary>
+      <p>请把失败提示截图，通过技术支持页底部的联系方式发给我们；也可以让 AI 重新生成（它会按 skill 里的自检清单校验后再输出）。</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>相关页面</h2>
+    <div class="links">
+      <a href="https://dragonlongpro.github.io/progressiveload/support/">技术支持</a>
+      <a href="https://dragonlongpro.github.io/progressiveload/privacy/">隐私政策</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>联系邮箱：yjworks@foxmail.com</p>
+    <p>工作时间：周一至周五（法定节假日及周末休息）</p>
+  </footer>
+
+  </div>
+
+  <!-- ========== English ========== -->
+  <div id="page-en" style="display:none">
+
+  <header>
+    <img class="app-icon" src="app-icon.png" alt="ProgressiveLoad app icon">
+    <h1>ProgressiveLoad</h1>
+    <p>A native-grade app for personal strength training logs<br>Import from Another App · How To</p>
+  </header>
+
+  <section>
+    <h2>What this is</h2>
+    <div class="card">
+      <p>Move your <strong>training history</strong> from another training app (e.g. Hevy) into ProgressiveLoad: strength workouts are imported with each exercise and every set's weight and reps, and cardio is imported as daily minutes.</p>
+      <p class="muted">Importing only adds training records — your profile, plans and existing data are untouched. If a date overlaps, you choose what to keep first.</p>
+      <p class="muted">Works with any app whose per-set training records an AI can read (Xunji shown as an example; the flow is the same for others).</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Steps</h2>
+    <ol class="steps">
+      <li><b>Get the skill document from your training app</b><div class="sub">In the app you want to export from, find its “Skill / Agent data export” entry (e.g. in Xunji: <strong>Profile → Data Export &amp; Import</strong>) and export the skill document (you can send it to WeChat File Transfer, then to your computer). The exact location varies by app.</div>
+        <div class="step-figure"><img src="step-1-source-app.png" alt="Xunji app: Profile → Data Export & Import"><div class="fig-note">Xunji app: Profile → Data Export &amp; Import</div></div>
+        <div class="step-figure"><img src="step-2-export-skills.png" alt="Export the skill document"><div class="fig-note">Export the skill document (access key included)</div></div></li>
+      <li><b>Send the skill document to an AI agent on your computer</b><div class="sub">On your <strong>computer</strong>, open an AI agent client that supports skills (e.g. Kimi Work, DeepSeek Harness, WorkBuddy — web chat pages don't apply), and drop the skill document into the conversation. When it asks what you want to do, just tap <strong>“Skip”</strong>.</div>
+        <div class="step-figure"><img src="step-3-agent-skip.png" alt="Tap Skip when the AI agent asks"><div class="fig-note">Tap “Skip” when the AI asks what to do</div></div></li>
+      <li><b>Send the import skill and get the JSON</b><div class="sub">First download <code>progressive-load-import.skill.md</code> (button below) and drop it into the same conversation. The AI matches exercise names to ProgressiveLoad's built-in exercises and, after a short wait, returns a <code>progressive_load_import_YYYYMMDD.json</code> file with import instructions.</div>
+        <a class="download-btn download-inline" href="progressive-load-import.skill.md" download>Download progressive-load-import.skill.md</a>
+        <p class="download-note">7.6 KB · save it, then drop it into the AI conversation</p>
+        <div class="step-figure"><img src="step-4-json-result.png" alt="The AI generates the JSON import file"><div class="fig-note">The generated JSON import file (example)</div></div></li>
+      <li><b>Save the JSON file to your iPhone / iPad</b><div class="sub">Send the <code>.json</code> file to your phone via WeChat File Transfer, AirDrop or email, and save it in the Files app. The file name must end with <code>.json</code>.</div></li>
+      <li><b>Import in ProgressiveLoad</b><div class="sub">Open ProgressiveLoad → “Profile” tab → “Data Management” → “<strong>Import from Another App</strong>”, and pick the JSON file you saved.</div></li>
+      <li><b>Resolve date overlaps (if any)</b><div class="sub">When an existing date overlaps, follow the prompts: choose “Keep existing” if unsure — nothing you already have will be deleted.</div></li>
+      <li><b>Done</b><div class="sub">“Successfully imported X days of data” means it worked. To undo, use “Delete Imported Records” in Data Management to remove everything from this import at once.</div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <details>
+      <summary>What gets imported?</summary>
+      <ul>
+        <li>Strength training: date, exercise (auto-matched to built-in exercises and equipment), and weight &amp; reps for every set;</li>
+        <li>Cardio: daily total minutes and a short note;</li>
+        <li>Rest times, RPE and notes are not migrated (the source format doesn't carry them).</li>
+      </ul>
+    </details>
+    <details>
+      <summary>“Import File” vs. “Import from Another App”?</summary>
+      <p>“Import File” <strong>replaces everything</strong>: it deletes all current data and adopts the file — use it to restore a backup. “Import from Another App” only <strong>adds</strong> training records, for migrating history from another app. Don't mix them up.</p>
+    </details>
+    <details>
+      <summary>What happens if I import the same file twice?</summary>
+      <p>Overlapping dates prompt a choice: keep existing, use the new record, or keep both. “Keep existing” is always safe — nothing gets lost.</p>
+    </details>
+    <details>
+      <summary>What if the AI-generated file fails to import?</summary>
+      <p>Take a screenshot of the failure message and send it to us via the contact options at the bottom of the Support page; or ask the AI to regenerate (it self-checks against the checklist in the skill before output).</p>
+    </details>
+  </section>
+
+  <section>
+    <h2>Related pages</h2>
+    <div class="links">
+      <a href="https://dragonlongpro.github.io/progressiveload/support/">Support</a>
+      <a href="https://dragonlongpro.github.io/progressiveload/privacy/">Privacy Policy</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Contact: yjworks@foxmail.com</p>
+    <p>Working hours: Monday–Friday (closed on weekends and public holidays)</p>
+  </footer>
+
+  </div>
+
+</div>
+
+<script>
+  function applyLang(lang) {
+    var zh = document.getElementById('page-zh');
+    var en = document.getElementById('page-en');
+    var btn = document.getElementById('langToggle');
+    if (lang === 'en') {
+      zh.style.display = 'none';
+      en.style.display = 'block';
+      btn.textContent = '中文';
+      document.documentElement.lang = 'en';
+    } else {
+      zh.style.display = 'block';
+      en.style.display = 'none';
+      btn.textContent = 'EN';
+      document.documentElement.lang = 'zh-Hans';
+    }
+  }
+  function toggleLang() {
+    var zhVisible = document.getElementById('page-zh').style.display !== 'none';
+    var lang = zhVisible ? 'en' : 'zh';
+    try { localStorage.setItem('import-lang', lang); } catch (e) {}
+    applyLang(lang);
+    window.scrollTo(0, 0);
+  }
+  (function () {
+    var lang = null;
+    try { lang = localStorage.getItem('import-lang'); } catch (e) {}
+    if (!lang) {
+      lang = (navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    applyLang(lang);
+  })();
+</script>
+
+</body>
+</html>
